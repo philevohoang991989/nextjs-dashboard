@@ -1,29 +1,19 @@
 'use client'
 
-import { SessionProvider, getSession, useSession } from 'next-auth/react'
-import { ReactNode, useEffect, useState } from 'react'
+import { Session } from 'next-auth';
+import { SessionProvider} from 'next-auth/react'
+import { ReactNode} from 'react'
 
 interface ProvidersProps {
+  session?: Session | null;
   children: ReactNode;
 }
 
-function Providers({ children }: ProvidersProps) {
-  const [token, setToken] = useState<string | null>(null);
-
-  // Fetch session and extract token if needed
-  useEffect(() => {
-    const fetchToken = async () => {
-      const session = await getSession();
-      if (session && session.token) {
-        setToken(session.token as string);
-      }
-    };
-
-    fetchToken();
-  }, []);
+function Providers({ children,session  }: ProvidersProps) {
+  
 
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       {children}
     </SessionProvider>
   );

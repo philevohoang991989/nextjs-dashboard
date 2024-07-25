@@ -1,4 +1,4 @@
-"use client";
+
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import { useRouter } from "next/navigation";
 
 interface SideNavProps {
   items: NavItem[];
@@ -22,39 +23,29 @@ interface SideNavProps {
 
 export function SideNav({ items, setOpen, className }: SideNavProps) {
   // const path = usePathname();
-  // const { isOpen } = useSidebar();
-  // const [openItem, setOpenItem] = useState("");
-  // const [lastOpenItem, setLastOpenItem] = useState("");
-
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setOpenItem(lastOpenItem);
-  //   } else {
-  //     setLastOpenItem(openItem);
-  //     setOpenItem("");
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isOpen]);
   const [isOpenBrowse, setIsOpenBrowse] = useState(false);
   const [isOpenAdministration, setIsOpenAdministration] = useState(false);
+  const router = useRouter()
   return (
-    <div className="md:flex flex-col bg-[#0A4F73] h-[100vh] relative px-5 py-6">
+    <nav className="md:flex flex-col bg-[#0A4F73] h-[100vh] relative px-5 py-6">
       <div className="pb-[2rem]">
         {" "}
         <Image src={Logo} priority={true} alt="Logo" />
       </div>
-      <Link
+      <Button variant="link" className="p-0 flex justify-start text-[#B4D1DF] hover:text-white font-semibold hover:no-underline" onClick={() => router.push('/create')}>Create</Button>
+      <Button variant="link" className="p-0 flex justify-start text-[#B4D1DF] hover:text-white font-semibold hover:no-underline" onClick={() => router.push('/upload')}>Upload</Button>
+      {/* <Link
         href="#"
         className="rounded-md px-0 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
       >
         Create
       </Link>
       <Link
-        href="#"
+        href="/upload"
         className="rounded-md px-0 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
       >
         Upload
-      </Link>
+      </Link> */}
       <Collapsible
         open={isOpenBrowse}
         onOpenChange={setIsOpenBrowse}
@@ -147,6 +138,6 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
       >
         Report
       </Link>
-    </div>
+    </nav>
   );
 }
