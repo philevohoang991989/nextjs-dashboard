@@ -1,4 +1,4 @@
-export default function ReportPage(params:type) {
+export default function ReportPage() {
     return(
         <div>
             <p>Report</p>

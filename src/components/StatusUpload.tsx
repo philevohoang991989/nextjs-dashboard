@@ -53,7 +53,6 @@ const Status: React.FC<StatusComponentProps> = ({
         <div
           className={`d-flex flex-row justify-content-between align-items-center`}
         >
-          {/* <span >{percent}</span> */}
           <ProgressCircle progress={percent} color="#0D6999" />
         </div>
       )}
