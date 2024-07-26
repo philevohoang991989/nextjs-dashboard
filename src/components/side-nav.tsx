@@ -33,6 +33,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
   const [isOpenBrowse, setIsOpenBrowse] = useState(false);
   const [isOpenAdministration, setIsOpenAdministration] = useState(false);
   const router = useRouter();
+  
   return (
     <nav className="md:flex flex-col bg-[#0A4F73] h-[100vh] relative px-5 py-6">
       <div className="pb-[2rem]">
@@ -81,7 +82,12 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-transparent"
+              className={cn(
+                "w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-[#083F5C]",
+                ((path.includes("video") ||
+                  path.includes("course")) &&
+                    "bg-[#083F5C] font-bold  text-white")
+              )}
             >
               <h4 className="text-[0.875rem] font-semibold">Browse</h4>
               <ArrowRight
@@ -108,12 +114,16 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
           >
             Seminar
           </Link>
-          <Link
-            href="#"
-            className="rounded-md px-4 py-3 h-[2.5rem] font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("video") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/video")}
           >
             Video
-          </Link>
+          </Button>
         </CollapsibleContent>
       </Collapsible>
       <Collapsible
