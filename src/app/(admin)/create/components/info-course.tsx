@@ -72,13 +72,13 @@ export default function InfoCourse() {
         </Button>}
       </div>
       {!localCourse && <>
-        <Label>Course</Label>{" "}
+        <Label htmlFor="course">Course</Label>{" "}
         <Select
           onValueChange={(value) => {
             getDetailCourse(value);
           }}
         >
-          <SelectTrigger>
+          <SelectTrigger id="course">
             <SelectValue placeholder="Choose Class and Course" />
           </SelectTrigger>
           <SelectContent>

@@ -421,8 +421,8 @@ export default function InfoSeminar() {
                 name="remark"
                 render={({ field }) => (
                   <FormItem>
-                    <Label>Remarks</Label>
-                    <Input placeholder="Not specified" {...field} />
+                    <Label htmlFor="remark">Remarks</Label>
+                    <Input id="remark" placeholder="Not specified" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}
@@ -441,9 +441,9 @@ export default function InfoSeminar() {
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
-                        <span className="text-[1rem] text-[#101828] font-medium">
+                        <Label className="text-[1rem] text-[#101828] font-medium">
                           Active
-                        </span>
+                        </Label>
                       </div>
                       <FormMessage />
                     </FormItem>
