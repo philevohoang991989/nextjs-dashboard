@@ -22,19 +22,27 @@ import CreateCourse from "./form-create-course";
 
 export default function InfoCourse() {
   const dispatch = useDispatch();
-  const [infoCourse, setInfoCourse] = useState<any>()
+  const [infoCourse, setInfoCourse] = useState<any>();
   const { data: session } = useSession();
   const axiosAuth = useAxiosAuth();
   const [listCourseHRMS, setlistCourseHRMS] = useState<any>([]);
   const [disable, setDisable] = useState<boolean>(false);
-  
+  const [localCourse, setLocalCourse] = useState<boolean>(false);
+  const [actionCourse, setActionCourse] = useState<boolean>(false);
   const getDetailCourse = (value: any) => {
+    console.log({ value });
+
     dispatch(updateIdCourse(value.courseDetail?.id));
     dispatch(updateIdClass(value.id));
     axiosAuth
       .get(`/Course/${value.courseDetail.id}/classes/${value.id}`)
       .then((res) => {
-        setInfoCourse(res.data)
+        setInfoCourse({
+          ...res.data,
+          idClass: value.id,
+          nameClass: value.name,
+        });
+        !res.data.isLocal && setDisable(true);
       });
   };
   useEffect(() => {
@@ -52,21 +60,28 @@ export default function InfoCourse() {
     <div className="bg-white rounded-2xl border-[1px] border-[#D0D5DD] p-6">
       <div className="flex items-start justify-between">
         <h3 className="text-[18px] font-semibold leading-7">
-          HRMS Course Information
+          {!localCourse?'HRMS Course Information':'Local Course Information'}
         </h3>
-        <Button className="h-[2.5rem] shadow-none">Create Local Course</Button>
-      </div>
-      <>
-        <Label>Course</Label>{" "}
-        <Select
-        value={infoCourse}
-          onValueChange={(value: any) => {
-            getDetailCourse(value);
-            setInfoCourse(value)
+       {!localCourse &&  <Button
+          className="h-[2.5rem] shadow-none"
+          onClick={() => {
+            setLocalCourse(true);
+            setActionCourse(true);
+            setDisable(false)
           }}
         >
-          <SelectTrigger className="h-[2.5rem]">
-            <SelectValue placeholder="Choose course" />
+          Create Local Course
+        </Button>}
+      </div>
+      {!localCourse && <>
+        <Label>Course</Label>{" "}
+        <Select
+          onValueChange={(value) => {
+            getDetailCourse(value);
+          }}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Choose Class and Course" />
           </SelectTrigger>
           <SelectContent>
             {listCourseHRMS.map((item: any) => {
@@ -79,8 +94,14 @@ export default function InfoCourse() {
             })}
           </SelectContent>
         </Select>
-      </>
-      <CreateCourse infoCourse={infoCourse}/>
+      </>}
+      <CreateCourse
+        infoCourse={infoCourse}
+        disable={disable}
+        localCourse={localCourse}
+        actionCourse={actionCourse}
+        setActionCourse={(value: boolean)=>setActionCourse(value)}
+      />
     </div>
   );
 }
