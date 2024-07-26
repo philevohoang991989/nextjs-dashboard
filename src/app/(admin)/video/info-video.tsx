@@ -104,7 +104,7 @@ export default function InfoVideo({ infoVideo, listTimeSpans }: Props) {
             id: res.data ? res.data.id : 0,
             size: +((res.data ? res.data.size : 0) / 1024 / 1024).toFixed(2),
             duration: res.data
-              ? moment(res.data.duration).format("HH:mm:ss")
+              ? moment.utc(+(res.data.duration ?? 0)).format("HH:mm:ss")
               : 0,
             videoName: res.data ? res.data.videoName : "",
             languageVideoId: res.data ? `${res.data.languageVideoId}` : "",
@@ -112,11 +112,11 @@ export default function InfoVideo({ infoVideo, listTimeSpans }: Props) {
             asTrailer: res.data ? res.data.asTrailer : false,
             timeSpanVideos: listTimeSpans
               ? listTimeSpans.map((x: any) => ({
-                  time: moment(x.time).format("HH:mm:ss"),
+                  time: moment.utc(+(x.time ?? 0)).format("HH:mm:ss"),
                   description: x.description, // Assuming x has a description property
                 }))
               : listTimeSpan.map((x: any) => ({
-                  time: moment(x.time).format("HH:mm:ss"),
+                  time: moment.utc(+(x.time ?? 0)).format("HH:mm:ss"),
                   description: x.description, // Assuming x has a description property
                 })),
           });
@@ -128,7 +128,7 @@ export default function InfoVideo({ infoVideo, listTimeSpans }: Props) {
           id: infoVideo ? infoVideo.id : 0,
           size: +((infoVideo ? infoVideo.size : 0) / 1024 / 1024).toFixed(2),
           duration: infoVideo
-            ? moment(infoVideo.duration).format("HH:mm:ss")
+            ? moment.utc(+(infoVideo.duration?? 0)).format("HH:mm:ss")
             : 0,
           videoName: infoVideo ? infoVideo.videoName : "",
           languageVideoId: infoVideo ? `${infoVideo.languageVideoId}` : "",
