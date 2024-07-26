@@ -5,7 +5,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Observable, Subscriber } from "rxjs";
@@ -246,18 +245,16 @@ export default function InfoSeminar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, seminar.idSeminar]);
   useEffect(() => {
-    
-    if ( datathumnail !== '') {
-      session && axiosAuth
-      .get(`File/${datathumnail}/thumbnail`)
-      .then((res) => {
-        setImageSeminar(res.data);
-      });
+    if (datathumnail !== "") {
+      session &&
+        axiosAuth.get(`File/${datathumnail}/thumbnail`).then((res) => {
+          setImageSeminar(res.data);
+        });
     } else {
       setImageSeminar("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datathumnail,session]);
+  }, [datathumnail, session]);
 
   return (
     <div className="flex grow p-[1.5rem]">
@@ -277,12 +274,12 @@ export default function InfoSeminar() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex gap-2 items-center">
-                    {" "}
                     <Switch
+                      id="isPublishNow"
                       checked={field.value}
                       onCheckedChange={field.onChange}
                     />
-                    <Label htmlFor="airplane-mode" className="text-[#101828]">
+                    <Label className="text-[#101828]" htmlFor="isPublishNow">
                       Publish now
                     </Label>
                   </div>
@@ -296,8 +293,12 @@ export default function InfoSeminar() {
             name="seminarName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Seminar Title*</FormLabel>
-                <Input placeholder="Not specified" {...field} />
+                <Label htmlFor="seminarName">Seminar Title*</Label>
+                <Input
+                  id="seminarName"
+                  placeholder="Not specified"
+                  {...field}
+                />
                 <FormMessage />
               </FormItem>
             )}
@@ -308,9 +309,9 @@ export default function InfoSeminar() {
               name="divisionId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Division</FormLabel>
+                  <Label htmlFor="divisionId">Division</Label>
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger>
+                    <SelectTrigger id="divisionId">
                       <SelectValue placeholder="Not specified" />
                     </SelectTrigger>
                     <SelectContent>
@@ -332,11 +333,12 @@ export default function InfoSeminar() {
               name="publishStart"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Schedule to publish</FormLabel>
+                  <Label htmlFor="publishStart">Schedule to publish</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
+                          id="publishStart"
                           variant={"outline"}
                           className={cn(
                             "pl-3 text-left font-normal w-[100%] h-[44px]",
@@ -371,7 +373,7 @@ export default function InfoSeminar() {
               name="publishEnd"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Publishing End Date</FormLabel>
+                  <Label>Publishing End Date</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -419,7 +421,7 @@ export default function InfoSeminar() {
                 name="remark"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Remarks</FormLabel>
+                    <Label>Remarks</Label>
                     <Input placeholder="Not specified" {...field} />
                     <FormMessage />
                   </FormItem>
@@ -427,7 +429,7 @@ export default function InfoSeminar() {
               />
             </div>
             <div className="col-span-1">
-              <FormLabel>CLC Plus Status</FormLabel>
+              <Label>CLC Plus Status</Label>
               <div className="mt-[1rem] flex items-center justify-start gap-4">
                 <FormField
                   control={form.control}
@@ -474,7 +476,7 @@ export default function InfoSeminar() {
               name="images"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[1.4rem]">
+                  <Label className="text-[1.4rem]">
                     <span className="text-[18px] font-semibold text-[#344054]">
                       Thumbnail
                     </span>
@@ -485,7 +487,7 @@ export default function InfoSeminar() {
                     >
                       <Image src={Upload} alt="Upload" /> Browse
                     </div>
-                  </FormLabel>
+                  </Label>
                   <FormControl>
                     <Input
                       type="file"

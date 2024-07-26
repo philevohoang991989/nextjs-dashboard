@@ -191,7 +191,7 @@ export default function UploadPage() {
           <div className="d-flex flex-column justify-content-between align-items-center gap-3 body-upload">
             <p className="mb-4 font-semibold text-[#101828]">Upload Video</p>
             <div className="upload-icon borer-gray p-8 border-dashed border rounded-lg">
-              <label className="upload-button hover:cursor-pointer flex justify-center flex-col gap-4 items-center">
+              <label htmlFor="upload" className="upload-button hover:cursor-pointer flex justify-center flex-col gap-4 items-center">
                 <input
                   className="hidden"
                   type="file"

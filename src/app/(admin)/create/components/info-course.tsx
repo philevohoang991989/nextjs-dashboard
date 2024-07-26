@@ -6,8 +6,6 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useAxiosAuth from "@/lib/hook/useAxiosAuth";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import {

@@ -8,7 +8,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -27,6 +26,7 @@ import { CreateClass, TypeCourse } from "@/types";
 import useAxiosAuth from "@/lib/hook/useAxiosAuth";
 import { ENDPOINT } from "@/constants/endpoint";
 import { updateIdClass, updateIdCourse } from "@/redux/slices/seminarSlice";
+import { Label } from "@/components/ui/label";
 
 const courseFormSchema = z.object({
   id: z.number(),
@@ -48,14 +48,14 @@ interface Props {
   disable: boolean;
   localCourse: boolean;
   actionCourse: boolean;
-  setActionCourse:(value: boolean)=>void;
+  setActionCourse: (value: boolean) => void;
 }
 export default function CreateCourse({
   infoCourse,
   disable,
   localCourse,
   actionCourse,
-  setActionCourse
+  setActionCourse,
 }: Props) {
   const seminar = useSelector((state: any) => state.seminar);
   const [info, setInfo] = useState();
@@ -103,7 +103,7 @@ export default function CreateCourse({
       form.reset(data);
       dispatch(updateIdCourse(res.data.courseId));
       dispatch(updateIdClass(res.data.id));
-      typeof setActionCourse === "function" && setActionCourse(false)
+      typeof setActionCourse === "function" && setActionCourse(false);
       setActionCourse(false);
     });
   };
@@ -124,7 +124,7 @@ export default function CreateCourse({
     };
     axiosAuth.post(ENDPOINT.CREATE_CLASS, newClassCourse).then((res) => {
       form.reset(data);
-      typeof setActionCourse === "function" && setActionCourse(false)
+      typeof setActionCourse === "function" && setActionCourse(false);
       dispatch(updateIdCourse(res.data.courseId));
       dispatch(updateIdClass(res.data.id));
       // setActionCourse(false);
@@ -150,8 +150,9 @@ export default function CreateCourse({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Name</FormLabel>
+                  <Label htmlFor="name">Course Name</Label>
                   <Input
+                    id="name"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -167,8 +168,9 @@ export default function CreateCourse({
               name="curriculum"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Curriculum</FormLabel>
+                  <Label htmlFor="curriculum">Course Curriculum</Label>
                   <Input
+                    id="curriculum"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -182,8 +184,9 @@ export default function CreateCourse({
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Catgory</FormLabel>
+                  <Label htmlFor="category">Course Catgory</Label>
                   <Input
+                    id="category"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -197,8 +200,9 @@ export default function CreateCourse({
               name="modelOfTraining"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mode of Training</FormLabel>
+                  <Label htmlFor="modelOfTraining">Mode of Training</Label>
                   <Input
+                    id="modelOfTraining"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -212,8 +216,9 @@ export default function CreateCourse({
               name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Subject</FormLabel>
+                  <Label htmlFor="subject">Course Subject</Label>
                   <Input
+                    id="subject"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -227,8 +232,9 @@ export default function CreateCourse({
               name="targetParticipant"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Target Participant</FormLabel>
+                  <Label htmlFor="targetParticipant">Target Participant</Label>
                   <Input
+                    id="targetParticipant"
                     placeholder="Not specified"
                     disabled={disable}
                     {...field}
@@ -244,13 +250,14 @@ export default function CreateCourse({
               name="heldDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Held Date</FormLabel>
+                  <Label htmlFor="heldDate">Held Date</Label>
                   <Popover>
-                    <PopoverTrigger asChild>
+                    <PopoverTrigger asChild >
                       <FormControl>
                         <Button
                           variant={"outline"}
                           disabled={disable}
+                          id="heldDate"
                           className={cn(
                             "pl-3 text-left font-normal w-[100%] h-[44px]",
                             !field.value && "text-muted-foreground"
@@ -286,8 +293,8 @@ export default function CreateCourse({
                 name="referenceClass"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Reference Class</FormLabel>
-                    <Input placeholder="Not specified" {...field} />
+                    <Label htmlFor="referenceClass">Reference Class</Label>
+                    <Input id="referenceClass" placeholder="Not specified" {...field} />
                     <FormMessage />
                   </FormItem>
                 )}
