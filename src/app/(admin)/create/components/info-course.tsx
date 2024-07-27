@@ -17,9 +17,12 @@ import {
 } from "@/components/ui/select";
 import { ENDPOINT } from "@/constants/endpoint";
 import CreateCourse from "./form-create-course";
+import { usePathname } from "next/navigation";
 
 export default function InfoCourse() {
   const dispatch = useDispatch();
+  const seminar = useSelector((state: any) => state.seminar);
+  const pathname = usePathname()
   const [infoCourse, setInfoCourse] = useState<any>();
   const { data: session } = useSession();
   const axiosAuth = useAxiosAuth();
@@ -54,6 +57,16 @@ export default function InfoCourse() {
       // Optionally handle specific error cases here
     }
   }, [session]);
+  useEffect(() => {
+    session && seminar.idCourse !== 0 && seminar.idClass !== 0 && seminar.idSeminar !== 0 && pathname !== "/seminar/create"
+      && axiosAuth
+          .get(`/Course/${seminar.idCourse}/classes/${seminar.idClass}`)
+          .then((res) => {
+           setInfoCourse(res.data)
+            !res.data.isLocal && setDisable(true);
+          })
+     
+  }, [seminar.idCourse, seminar.idClass, seminar.idSeminar]);
   return (
     <div className="bg-white rounded-2xl border-[1px] border-[#D0D5DD] p-6">
       <div className="flex items-start justify-between">

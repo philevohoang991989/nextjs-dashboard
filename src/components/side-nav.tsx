@@ -60,18 +60,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
       >
         Upload
       </Button>
-      {/* <Link
-        href="#"
-        className="rounded-md px-0 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
-      >
-        Create
-      </Link>
-      <Link
-        href="/upload"
-        className="rounded-md px-0 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
-      >
-        Upload
-      </Link> */}
+     
       <Collapsible
         open={isOpenBrowse}
         onOpenChange={setIsOpenBrowse}
@@ -85,7 +74,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
               className={cn(
                 "w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-[#083F5C]",
                 ((path.includes("video") ||
-                  path.includes("course")) &&
+                  path.includes("course")||  path.includes("seminar")) &&
                     "bg-[#083F5C] font-bold  text-white")
               )}
             >
@@ -102,25 +91,33 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
         </div>
 
         <CollapsibleContent className="pl-4 flex flex-col h-[100%]">
-          <Link
-            href="#"
-            className="rounded-md px-4 py-3 h-[2.5rem] font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+        <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("course") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/course/list")}
           >
             Course
-          </Link>
-          <Link
-            href="#"
-            className="rounded-md px-4 py-3 h-[2.5rem] font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          </Button>
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("seminar") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/seminar/list")}
           >
             Seminar
-          </Link>
+          </Button>
           <Button
             variant="link"
             className={cn(
               "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
               path.includes("video") && "bg-[#083F5C] font-bold  text-white"
             )}
-            onClick={() => router.push("/video")}
+            onClick={() => router.push("/video/list")}
           >
             Video
           </Button>
