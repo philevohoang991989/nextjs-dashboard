@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Hls from "hls.js";
 import Plyr from "plyr";
 import "plyr/dist/plyr.css";
-import { watchFull, watchSeek } from "@/lib/utils";
-import { VideoWatchPercent } from "@/constants";
+import { watchFull } from "@/lib/utils";
 
 export default function VideoPlayer({ src,setDataHistory,dataHistory }: { src: string,setDataHistory?:(value : any)=>void,dataHistory?: any }) {
   const videoRef = useRef<HTMLVideoElement>(null);

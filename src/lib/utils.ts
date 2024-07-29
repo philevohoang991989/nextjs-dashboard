@@ -1,3 +1,4 @@
+import { VideoWatchPercent } from "@/constants";
 import { type ClassValue, clsx } from "clsx"
 import moment from "moment";
 import { twMerge } from "tailwind-merge"
@@ -32,3 +33,7 @@ export const parseParams = (params: any) => {
 
   return options ? options.slice(0, -1) : options;
 };
+export const watchFull=(pool: Set<number>, videoDuration: number): boolean=> {
+  
+  return pool.size >= videoDuration * VideoWatchPercent.Full;
+}
