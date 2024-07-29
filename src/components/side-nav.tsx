@@ -33,7 +33,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
   const [isOpenBrowse, setIsOpenBrowse] = useState(false);
   const [isOpenAdministration, setIsOpenAdministration] = useState(false);
   const router = useRouter();
-  
+
   return (
     <nav className="md:flex flex-col bg-[#0A4F73] h-[100vh] relative px-5 py-6">
       <div className="pb-[2rem]">
@@ -60,7 +60,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
       >
         Upload
       </Button>
-     
+
       <Collapsible
         open={isOpenBrowse}
         onOpenChange={setIsOpenBrowse}
@@ -73,9 +73,10 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
               size="sm"
               className={cn(
                 "w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-[#083F5C]",
-                ((path.includes("video") ||
-                  path.includes("course")||  path.includes("seminar")) &&
-                    "bg-[#083F5C] font-bold  text-white")
+                (path.includes("video") ||
+                  path.includes("course") ||
+                  path.includes("seminar")) &&
+                  "bg-[#083F5C] font-bold  text-white"
               )}
             >
               <h4 className="text-[0.875rem] font-semibold">Browse</h4>
@@ -91,7 +92,7 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
         </div>
 
         <CollapsibleContent className="pl-4 flex flex-col h-[100%]">
-        <Button
+          <Button
             variant="link"
             className={cn(
               "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
@@ -133,7 +134,14 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-transparent"
+              className={cn(
+                "w-[100%] h-[2.5rem] text-[#B4D1DF] hover:text-white flex justify-between py-2 px-3 hover:bg-[#083F5C]",
+                (path.includes("user-permission") ||
+                  path.includes("resolution") ||
+                  path.includes("division") || 
+                  path.includes("audit-log")) &&
+                  "bg-[#083F5C] font-bold  text-white"
+              )}
             >
               <h4 className="text-[0.875rem] font-semibold">Administration</h4>
               <ArrowRight
@@ -150,38 +158,55 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
         </div>
 
         <CollapsibleContent className="pl-4 flex flex-col h-[100%]">
-          <Link
-            href="#"
-            className="rounded-md h-[2.5rem] px-4 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("user-permission/list") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/user-permission/list")}
           >
             Users Permission
-          </Link>
-          <Link
-            href="#"
-            className="rounded-md h-[2.5rem] px-4 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          </Button>
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("resolution/list") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/resolution/list")}
           >
             Resolution Control
-          </Link>
-          <Link
-            href="#"
-            className="rounded-md h-[2.5rem] px-4 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          </Button>
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("/division/list") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/division/list")}
           >
             Division
-          </Link>
-          <Link
-            href="#"
-            className="rounded-md h-[2.5rem] px-4 py-3 font-mono text-[0.875rem] w-full text-[#B4D1DF] hover:text-white font-semibold"
+          </Button>
+          <Button
+            variant="link"
+            className={cn(
+              "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
+              path.includes("audit-log/list") && "bg-[#083F5C] font-bold  text-white"
+            )}
+            onClick={() => router.push("/audit-log/list")}
           >
             Audit Log
-          </Link>
+          </Button>
         </CollapsibleContent>
       </Collapsible>
       <Button
         variant="link"
         className={cn(
           "p-0 flex justify-start py-2 px-3 h-[2.5rem] text-[#B4D1DF] hover:text-white font-semibold hover:no-underline",
-          path.includes("create") && "bg-[#083F5C] font-bold  text-white"
+          path.includes("report") && "bg-[#083F5C] font-bold  text-white"
         )}
+        onClick={() => router.push("/report")}
       >
         Report
       </Button>

@@ -10,7 +10,6 @@ export const middleware = async (request: NextRequest) => {
 		req: request,
 		secret: process.env.NEXTAUTH_SECRET
 	})
-console.log({token});
 
 	const { pathname } = request.nextUrl
 

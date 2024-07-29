@@ -31,7 +31,6 @@ export default function InfoCourse() {
   const [localCourse, setLocalCourse] = useState<boolean>(false);
   const [actionCourse, setActionCourse] = useState<boolean>(false);
   const getDetailCourse = (value: any) => {
-    console.log({ value });
 
     dispatch(updateIdCourse(value.courseDetail?.id));
     dispatch(updateIdClass(value.id));

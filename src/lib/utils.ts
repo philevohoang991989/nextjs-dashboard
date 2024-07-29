@@ -6,11 +6,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 export const timeStringToMilliseconds = (timeString: string): number => {
-  console.log({ timeString });
   
   const timeMoment = moment(timeString, "HH:mm:ss");
   const milliseconds = timeMoment.diff(moment().startOf('day'));
-  console.log({ timeMoment ,milliseconds});
   return milliseconds;
 }
 export const parseParams = (params: any) => {

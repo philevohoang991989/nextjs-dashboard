@@ -72,7 +72,7 @@ export default function VideoPlayer({ src,setDataHistory,dataHistory }: { src: s
     const endVideo = videoRef.current.currentTime === duration;
 
     if (endVideo && watchFull(logTracking, duration)) {
-      console.log("full", watchFull(logTracking, duration));
+      console.log("full");
       typeof setDataHistory === 'function' && setDataHistory({
         ...dataHistory,
         viewDuration: videoRef.current.currentTime * 1000

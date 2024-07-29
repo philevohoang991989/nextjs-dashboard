@@ -16,7 +16,6 @@ const Status: React.FC<StatusComponentProps> = ({
   type = "",
 }) => {
   const [Type, setType] = useState<any>(StatusUpload);
-  console.log({ status });
 
   useEffect(() => {
     switch (type) {

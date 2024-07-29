@@ -13,7 +13,6 @@ interface Props {
   listVideos?: any;
 }
 export default function ListVideo({ listVideos }: Props) {
-  console.log({ listVideos });
   const dispatch = useDispatch();
   const axiosAuth = useApiAuth();
   const seminar = useSelector((state: any) => state.seminar);
@@ -30,7 +29,6 @@ export default function ListVideo({ listVideos }: Props) {
     timeSpanVideos: [],
   };
   const addVideo = () => {
-    console.log("Add Video");
     const newSeminar = { ...defaultVideo };
     setItems((prevItems: any) => [...prevItems, newSeminar]);
   };

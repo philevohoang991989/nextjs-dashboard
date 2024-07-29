@@ -80,7 +80,6 @@ export default function Filter({ setFilter, setPageSize, setPage }: Props) {
   });
 
   async function onSearch(data: z.infer<typeof searchFormSchema>) {
-    console.log({ data });
 
     if (setFilter)
       setFilter({

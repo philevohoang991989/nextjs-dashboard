@@ -181,7 +181,6 @@ export default function ListSeminar() {
     durationFrom: "",
     durationTo: "",
   });
-  console.log({ filter });
   useEffect(() => {
     session &&
       axiosAuth

@@ -15,7 +15,6 @@ const TimeInput: React.FC<TimeInputProps> = ({ value, onChange }) => {
 
     if (val.length >= 2) val = val.slice(0, 2) + ":" + val.slice(2);
     if (val.length >= 5) val = val.slice(0, 5) + ":" + val.slice(5, 7);
-    console.log({ val });
 
     setInputValue(val);
     onChange(val);

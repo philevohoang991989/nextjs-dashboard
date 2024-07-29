@@ -22,7 +22,6 @@ const auth: AuthOptions = {
 
           if (response && response.data) {
             const user = response.data;
-            console.log({ user });
             return Promise.resolve(user);
           } else {
             // Handle authentication failure
@@ -37,7 +36,6 @@ const auth: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      // console.log({ callbacksuser: user });
       if (user) {
         return {
           ...user,

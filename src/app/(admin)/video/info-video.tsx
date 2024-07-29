@@ -95,9 +95,6 @@ export default function InfoVideo({ infoVideo, listTimeSpans }: Props) {
       if (infoVideo === undefined && seminar.idVideo !== 0) {
         axiosAuth.get(`Video/${seminar.idVideo}`).then((res) => {
           setStreamUrl(res.data.streamUrl);
-          console.log({
-            duration: moment(res.data.duration).format("HH:mm:ss"),
-          });
           setSpeakers(res.data.speakers);
           formInfoVideo.reset({
             ...defaultValues,
@@ -177,11 +174,9 @@ export default function InfoVideo({ infoVideo, listTimeSpans }: Props) {
       axiosAuth
         .put(`Seminar/${seminar.idSeminar}/video`, dataSave)
         .then((res) => {
-          console.log({ updatevideoseinar: res });
         });
     } else {
       axiosAuth.put(`video/${data.id}`, dataSave).then((res) => {
-        console.log({ update: res });
       });
     }
   }
